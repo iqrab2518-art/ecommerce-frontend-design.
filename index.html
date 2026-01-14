@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopHub - Your Online Store</title>
+    <style>
+      /* ===== GLOBAL RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* ===== CSS VARIABLES ===== */     
+           :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --border-color: #e5e7eb;
+            --bg-light: #f9fafb;
+            --white: #ffffff;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+        html {
+         font-size: 16px; 
+        }
+    /* ===== BODY STYLING ===== */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+             min-width: 1200px;
+        }
+     /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            
+        }
+    /* ===== HEADER ===== */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+    /* ===== HEADER TOP BAR ===== */
+        .header-top {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-main {
+            padding: 20px 0;
+        }
+
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 50px 12px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        /* ===== NAVIGATION ===== */
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+       /* ===== HEADER ICONS ===== */
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.2s;
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--warning);
+            color: white;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 60px;
+        }
+
+        .hero .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .featured-categories {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: var(--text-dark);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .category-card {
+            background-color: var(--bg-light);
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .category-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .category-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .product-section {
+            margin-bottom: 60px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            background-color: var(--bg-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .product-category {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-buy {
+            flex: 1;
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-buy:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-cart {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding: 14px 20px;
+        }
+
+        .btn-cart:hover {
+            background-color: var(--border-color);
+        }
+
+ 
+        .product-details {
+            display: none;
+            margin: 60px 0;
+        }
+
+        .product-details.active {
+            display: block;
+        }
+
+        .product-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .product-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 500px;
+            background-color: var(--bg-light);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .thumbnail-images {
+            display: flex;
+            gap: 15px;
+        }
+
+        .thumbnail {
+            width: 100px;
+            height: 100px;
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .thumbnail:hover,
+        .thumbnail.active {
+            border-color: var(--primary-color);
+        }
+
+        .product-detail-info h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .page-btn.active{
+         background:#2563eb;
+         color:white;
+        }
+
+        .stars {
+            color: var(--warning);
+        }
+
+        .detail-price {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+        }
+
+        .product-description {
+            margin-bottom: 30px;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .product-options {
+            margin-bottom: 30px;
+        }
+
+        .option-group {
+            margin-bottom: 20px;
+        }
+
+        .option-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .size-selector {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .size-selector:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--border-color);
+            background-color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .quantity-btn:hover {
+            border-color: var(--primary-color);
+            background-color: var(--bg-light);
+        }
+
+        .quantity-value {
+            font-size: 18px;
+            font-weight: 600;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .detail-actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+
+        .reviews-section {
+            margin-top: 60px;
+            padding-top: 60px;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .review-card {
+            background-color: var(--bg-light);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .review-date {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 40px;
+        }
+
+        .page-btn {
+            padding: 10px 18px;
+            border: 2px solid var(--border-color);
+            background-color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .page-btn:hover,
+        .page-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+      /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--text-dark);
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+            
+            .product-detail-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-main .container {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== HEADER START ===== -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div>Free shipping on orders over $50</div>
+                <div>📞 Customer Service: 1-800-SHOP</div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <a class="logo" onclick="showHome()">ShopHub</a>
+                
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search for products...">
+                    <button class="search-btn" onclick="handleSearch()">Search</button>
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li><a onclick="showHome()">Home</a></li>
+                        <li><a onclick="showProducts()">Products</a></li>
+                        <li><a onclick="showAbout()">About</a></li>
+                        <li><a onclick="showContact()">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-icons">
+                    <button class="icon-btn">👤</button>
+                    <button class="icon-btn">❤️</button>
+                    <button class="icon-btn">
+                        🛒
+                        <span class="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+   <!-- ===== HOME PAGE ===== -->
+    <div id="homePage">
+
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Discover Your Perfect Style</h1>
+                    <p>Shop the latest trends in fashion, electronics, and home decor. Quality products at unbeatable prices.</p>
+                    <div class="cta-buttons">
+                        <button class="btn btn-primary" onclick="showProducts()">Shop Now</button>
+                        <button class="btn btn-secondary">Learn More</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div style="font-size: 200px; opacity: 0.9;">🛍️</div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="featured-categories">
+            <div class="container">
+                <h2 class="section-title">Shop by Category</h2>
+                <div class="categories-grid">
+                    <div class="category-card" onclick="filterByCategory('Fashion')">
+                        <div class="category-icon">👔</div>
+                        <h3>Fashion</h3>
+                        <p>Trendy clothing & accessories</p>
+                    </div>
+                    <div class="category-card" onclick="filterByCategory('Electronics')">
+                        <div class="category-icon">💻</div>
+                        <h3>Electronics</h3>
+                        <p>Latest tech gadgets</p>
+                    </div>
+                    <div class="category-card" onclick="filterByCategory('Home')">
+                        <div class="category-icon">🏠</div>
+                        <h3>Home & Living</h3>
+                        <p>Beautiful home decor</p>
+                    </div>
+                    <div class="category-card" onclick="filterByCategory('Sports')">
+                        <div class="category-icon">⚽</div>
+                        <h3>Sports</h3>
+                        <p>Sports & outdoor gear</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <section id="productListingPage" class="product-section" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="products-grid" id="productsGrid">
+  
+            </div>
+            
+            <div class="pagination">
+                <button class="page-btn">← Prev</button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">4</button>
+                <button class="page-btn">Next →</button>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="productDetailsPage" class="product-details">
+        <div class="container">
+            <div class="product-detail-grid">
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <div style="font-size: 120px;">👕</div>
+                    </div>
+                    <div class="thumbnail-images">
+                        <div class="thumbnail active">
+                            <div style="font-size: 40px;">👕</div>
+                        </div>
+                        <div class="thumbnail">
+                            <div style="font-size: 40px;">👕</div>
+                        </div>
+                        <div class="thumbnail">
+                            <div style="font-size: 40px;">👕</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-detail-info">
+                    <h1>Premium Cotton T-Shirt</h1>
+                    <div class="product-rating">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <span>(248 reviews)</span>
+                    </div>
+                    <div class="detail-price">$29.99</div>
+                    <p class="product-description">
+                        Experience ultimate comfort with our premium cotton t-shirt. Made from 100% organic cotton, 
+                        this shirt features a modern fit and exceptional breathability. Perfect for everyday wear, 
+                        this versatile piece combines style with comfort.
+                    </p>
+
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label for="sizeSelect">Select Size:</label>
+                            <select id="sizeSelect" class="size-selector">
+                                <option value="">Choose a size</option>
+                                <option value="xs">Extra Small (XS)</option>
+                                <option value="s">Small (S)</option>
+                                <option value="m">Medium (M)</option>
+                                <option value="l">Large (L)</option>
+                                <option value="xl">Extra Large (XL)</option>
+                                <option value="xxl">2X Large (XXL)</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label>Quantity:</label>
+                            <div class="quantity-selector">
+                                <button class="quantity-btn" onclick="decreaseQuantity()">−</button>
+                                <span class="quantity-value" id="quantityValue">1</span>
+                                <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-actions">
+                        <button class="btn btn-primary" style="flex: 2;" onclick="addToCartFromDetails()">Add to Cart</button>
+                        <button class="btn btn-secondary" style="flex: 1;">❤️ Wishlist</button>
+                    </div>
+
+                    <div style="padding: 20px; background-color: var(--bg-light); border-radius: 8px;">
+                        <p><strong>✓</strong> Free shipping on orders over $50</p>
+                        <p><strong>✓</strong> 30-day return policy</p>
+                        <p><strong>✓</strong> Secure checkout</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="reviews-section">
+                <h2 class="section-title">Customer Reviews</h2>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="reviewer-name">Sarah Johnson</div>
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                        </div>
+                        <div class="review-date">December 15, 2024</div>
+                    </div>
+                    <p>Absolutely love this t-shirt! The fabric is so soft and comfortable. Fits perfectly and the quality is amazing for the price.</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="reviewer-name">Michael Chen</div>
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                        </div>
+                        <div class="review-date">December 10, 2024</div>
+                    </div>
+                    <p>Great quality shirt. I bought three in different colors. Highly recommend!</p>
+                </div>
+            </div>
+
+
+            <div class="reviews-section">
+                <h2 class="section-title">Related Products</h2>
+                <div class="products-grid" id="relatedProductsGrid" style="margin-bottom: 0;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="aboutPage" class="product-section" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">About ShopHub</h2>
+            
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="text-align: center; margin-bottom: 50px;">
+                    <div style="font-size: 100px; margin-bottom: 20px;">🛍️</div>
+                    <h3 style="font-size: 28px; margin-bottom: 20px; color: var(--primary-color);">Your Trusted Online Shopping Partner</h3>
+                    <p style="font-size: 18px; color: var(--text-light); line-height: 1.8;">
+                        Welcome to ShopHub, where quality meets affordability. We are dedicated to providing you with the best online shopping experience.
+                    </p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 50px;">
+                    <div style="text-align: center; padding: 30px; background-color: var(--bg-light); border-radius: 12px;">
+                        <div style="font-size: 48px; margin-bottom: 15px;">🎯</div>
+                        <h4 style="font-size: 20px; margin-bottom: 10px;">Our Mission</h4>
+                        <p style="color: var(--text-light);">To make quality products accessible to everyone at affordable prices.</p>
+                    </div>
+                    <div style="text-align: center; padding: 30px; background-color: var(--bg-light); border-radius: 12px;">
+                        <div style="font-size: 48px; margin-bottom: 15px;">👁️</div>
+                        <h4 style="font-size: 20px; margin-bottom: 10px;">Our Vision</h4>
+                        <p style="color: var(--text-light);">To become the most trusted online marketplace globally.</p>
+                    </div>
+                    <div style="text-align: center; padding: 30px; background-color: var(--bg-light); border-radius: 12px;">
+                        <div style="font-size: 48px; margin-bottom: 15px;">💎</div>
+                        <h4 style="font-size: 20px; margin-bottom: 10px;">Our Values</h4>
+                        <p style="color: var(--text-light);">Quality, integrity, and customer satisfaction above all.</p>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 50px; border-radius: 12px; text-align: center;">
+                    <h3 style="font-size: 32px; margin-bottom: 20px;">Why Choose Us?</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 30px;">
+                        <div>
+                            <div style="font-size: 36px; margin-bottom: 10px;">✓</div>
+                            <p style="font-size: 16px;">Free Shipping Over $50</p>
+                        </div>
+                        <div>
+                            <div style="font-size: 36px; margin-bottom: 10px;">✓</div>
+                            <p style="font-size: 16px;">30-Day Return Policy</p>
+                        </div>
+                        <div>
+                            <div style="font-size: 36px; margin-bottom: 10px;">✓</div>
+                            <p style="font-size: 16px;">Secure Payments</p>
+                        </div>
+                        <div>
+                            <div style="font-size: 36px; margin-bottom: 10px;">✓</div>
+                            <p style="font-size: 16px;">24/7 Support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contactPage" class="product-section" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-bottom: 50px;">
+
+                    <div>
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">Send us a Message</h3>
+                        <form id="contactForm" style="display: flex; flex-direction: column; gap: 20px;">
+                            <div>
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px;">Your Name</label>
+                                <input type="text" placeholder="Enter your name" style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; font-size: 16px;">
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px;">Email Address</label>
+                                <input type="email" placeholder="Enter your email" style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; font-size: 16px;">
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px;">Subject</label>
+                                <input type="text" placeholder="Enter subject" style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; font-size: 16px;">
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px;">Message</label>
+                                <textarea placeholder="Enter your message" rows="5" style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; font-size: 16px; resize: vertical;"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                        </form>
+                    </div>
+
+                    <div>
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">Get in Touch</h3>
+                        <div style="display: flex; flex-direction: column; gap: 25px;">
+                            <div style="display: flex; gap: 15px; align-items: start;">
+                                <div style="font-size: 32px; color: var(--primary-color);">📍</div>
+                                <div>
+                                    <h4 style="font-size: 18px; margin-bottom: 5px;">Address</h4>
+                                    <p style="color: var(--text-light);">123 Shopping Street<br>New York, NY 10001<br>United States</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 15px; align-items: start;">
+                                <div style="font-size: 32px; color: var(--primary-color);">📞</div>
+                                <div>
+                                    <h4 style="font-size: 18px; margin-bottom: 5px;">Phone</h4>
+                                    <p style="color: var(--text-light);">+1 (800) SHOP-HUB<br>+1 (800) 746-7482</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 15px; align-items: start;">
+                                <div style="font-size: 32px; color: var(--primary-color);">✉️</div>
+                                <div>
+                                    <h4 style="font-size: 18px; margin-bottom: 5px;">Email</h4>
+                                    <p style="color: var(--text-light);">support@shophub.com<br>sales@shophub.com</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 15px; align-items: start;">
+                                <div style="font-size: 32px; color: var(--primary-color);">🕐</div>
+                                <div>
+                                    <h4 style="font-size: 18px; margin-bottom: 5px;">Working Hours</h4>
+                                    <p style="color: var(--text-light);">Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday: Closed</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 30px; padding: 25px; background-color: var(--bg-light); border-radius: 12px;">
+                            <h4 style="font-size: 18px; margin-bottom: 15px;">Follow Us</h4>
+                            <div style="display: flex; gap: 15px; font-size: 32px;">
+                                <a href="https://www.facebook.com" target="_blank" style="transition: transform 0.2s; text-decoration: none;">📘</a>
+                                <a href="https://www.instagram.com" target="_blank" style="transition: transform 0.2s; text-decoration: none;">📷</a>
+                                <a href="https://www.twitter.com" target="_blank" style="transition: transform 0.2s; text-decoration: none;">🐦</a>
+                                <a href="https://www.linkedin.com" target="_blank" style="transition: transform 0.2s; text-decoration: none;">💼</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="privacyPolicyPage" class="product-section" style="display: none;">
+    <div class="container">
+        <h2 class="section-title">Privacy Policy</h2>
+        <div style="max-width: 900px; margin: 0 auto; line-height: 1.8; color: var(--text-light); font-size: 16px;">
+            <p>Welcome to ShopHub! Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your personal information when you use our website.</p>
+            
+            <h3>Information We Collect</h3>
+            <ul>
+                <li>Personal details you provide during registration, checkout, or contact forms.</li>
+                <li>Payment and billing information.</li>
+                <li>Browsing behavior and product preferences.</li>
+            </ul>
+
+            <h3>How We Use Your Information</h3>
+            <ul>
+                <li>To process and fulfill your orders.</li>
+                <li>To communicate with you about your orders or account.</li>
+                <li>To improve our website, products, and services.</li>
+            </ul>
+
+            <h3>Data Protection</h3>
+            <p>We implement industry-standard security measures to protect your information. We do not sell your personal data to third parties.</p>
+
+            <h3>Cookies</h3>
+            <p>Our website uses cookies to enhance your browsing experience. You can manage your cookie preferences in your browser settings.</p>
+
+            <h3>Contact Us</h3>
+            <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:support@shophub.com">support@shophub.com</a>.</p>
+        </div>
+    </div>
+</section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About ShopHub</h3>
+                    <p>Your trusted online marketplace for quality products at great prices. Shop with confidence.</p>
+                </div>
+                
+            
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="javascript:void(0);" onclick="showAbout()">About Us</a></li>
+                        <li><a href="javascript:void(0);" onclick="showContact()">Contact</a></li>
+                        <li><a href="javascript:void(0);" onclick="showFAQs()">FAQs</a></li>
+                        <li><a href="javascript:void(0);" onclick="showShippingInfo()">Shipping Info</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Customer Service</h3>
+                    <ul>
+                       <li><a href="javascript:void(0);" onclick="showPrivacyPolicy()">Privacy Policy</a></li>
+                       <li><a href="javascript:void(0);" onclick="showTrackOrder()">Track Order</a></li>
+                       <li><a href="javascript:void(0);" onclick="showReturns()">Returns</a></li>
+                       <li><a href="javascript:void(0);" onclick="showSizeGuide()">Size Guide</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <ul>
+                        <li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>
+                        <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
+                        <li><a href="https://www.twitter.com" target="_blank">Twitter</a></li>
+                        <li><a href="https://www.pinterest.com" target="_blank">Pinterest</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ShopHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- ===== JAVASCRIPT SECTION ===== -->
+    <script>
+
+        const products = [
+            { id: 1, name: 'Premium Cotton T-Shirt', category: 'Fashion', price: 29.99, icon: '👕', rating: 5, reviews: 248 },
+            { id: 2, name: 'Wireless Headphones', category: 'Electronics', price: 89.99, icon: '🎧', rating: 4, reviews: 156 },
+            { id: 3, name: 'Designer Sunglasses', category: 'Fashion', price: 149.99, icon: '🕶️', rating: 5, reviews: 89 },
+            { id: 4, name: 'Smart Watch', category: 'Electronics', price: 299.99, icon: '⌚', rating: 5, reviews: 312 },
+            { id: 5, name: 'Leather Backpack', category: 'Fashion', price: 79.99, icon: '🎒', rating: 4, reviews: 178 },
+            { id: 6, name: 'Running Shoes', category: 'Sports', price: 119.99, icon: '👟', rating: 5, reviews: 267 },
+            { id: 7, name: 'Coffee Maker', category: 'Home', price: 59.99, icon: '☕', rating: 4, reviews: 145 },
+            { id: 8, name: 'Yoga Mat', category: 'Sports', price: 34.99, icon: '🧘', rating: 5, reviews: 98 },
+            { id: 9, name: 'Desk Lamp', category: 'Home', price: 44.99, icon: '💡', rating: 4, reviews: 123 },
+            { id: 10, name: 'Bluetooth Speaker', category: 'Electronics', price: 69.99, icon: '🔊', rating: 5, reviews: 201 },
+            { id: 11, name: 'Winter Jacket', category: 'Fashion', price: 159.99, icon: '🧥', rating: 5, reviews: 187 },
+            { id: 12, name: 'Wall Clock', category: 'Home', price: 39.99, icon: '🕐', rating: 4, reviews: 76 }
+        ];
+
+        let cart = [];
+        let quantity = 1;
+        let currentProductId = 1;
+        
+        let currentPage = 1;
+        const productsPerPage = 6;
+
+        function generateProducts(productsToShow = products) {
+            const grid = document.getElementById('productsGrid');
+            if (!grid) return;
+
+
+            const totalPages = Math.ceil(productsToShow.length / productsPerPage);
+            if (currentPage > totalPages) currentPage = totalPages || 1;
+            const start = (currentPage - 1) * productsPerPage;
+            const end = start + productsPerPage;
+            const paginatedProducts = productsToShow.slice(start, end);
+
+            grid.innerHTML = paginatedProducts.map(product => `
+            <div class="product-card" data-product-id="${product.id}">
+                <div class="product-image">
+                  <div style="font-size: 80px;">${product.icon}</div>
+            </div>
+            <div class="product-info">
+                <div class="product-category">${product.category}</div>
+                <h3 class="product-title">${product.name}</h3>
+                <div class="product-price">${product.price.toFixed(2)}</div>
+                <div class="product-actions">
+                    <button class="btn btn-buy" onclick="buyNow(${product.id}, event)">Buy Now</button>
+                    <button class="btn btn-cart" onclick="addToCart(${product.id}, event)">🛒</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    
+    const pagination = document.querySelector('.pagination');
+    if (pagination) {
+        const pageButtons = pagination.querySelectorAll('.page-btn');
+        pageButtons.forEach(btn => btn.classList.remove('active'));
+        pageButtons.forEach(btn => {
+            if (parseInt(btn.textContent) === currentPage) btn.classList.add('active');
+        });
+    }
+
+    document.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+            if (!e.target.closest('button')) {
+                const productId = parseInt(this.dataset.productId);
+                showProductDetails(productId);
+            }
+        });
+    });
+}
+
+
+document.querySelectorAll('.page-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+        const totalPages = Math.ceil(products.length / productsPerPage);
+        if (this.textContent.includes('Prev')) {
+            if (currentPage > 1) currentPage--;
+        } else if (this.textContent.includes('Next')) {
+            if (currentPage < totalPages) currentPage++;
+        } else {
+            currentPage = parseInt(this.textContent);
+        }
+        generateProducts(); 
+    });
+});
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            showHome();
+            
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you! Your message has been sent successfully.');
+                    this.reset();
+                });
+            }
+
+            document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
+                thumb.addEventListener('click', function() {
+                    document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') handleSearch();
+                });
+            }
+
+            console.log('✅ All pages activated and ready!');
+            console.log('📄 Available pages: Home, Products, About, Contact, Product Details');
+        });
+
+        function generateProducts(productsToShow = products) {
+            const grid = document.getElementById('productsGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = productsToShow.map(product => `
+                <div class="product-card" data-product-id="${product.id}">
+                    <div class="product-image">
+                        <div style="font-size: 80px;">${product.icon}</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${product.category}</div>
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-price">${product.price.toFixed(2)}</div>
+                        <div class="product-actions">
+                            <button class="btn btn-buy" onclick="buyNow(${product.id}, event)">Buy Now</button>
+                            <button class="btn btn-cart" onclick="addToCart(${product.id}, event)">🛒</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (!e.target.closest('button')) {
+                        const productId = parseInt(this.dataset.productId);
+                        showProductDetails(productId);
+                    }
+                });
+            });
+        }
+
+  
+        function showHome() {
+            document.getElementById('homePage').style.display = 'block';
+            document.getElementById('productListingPage').style.display = 'none';
+            document.getElementById('productDetailsPage').classList.remove('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showProducts() {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('productListingPage').style.display = 'block';
+            document.getElementById('productDetailsPage').classList.remove('active');
+            generateProducts();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showProductDetails(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            currentProductId = productId;
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('productListingPage').style.display = 'none';
+            document.getElementById('productDetailsPage').classList.add('active');
+            
+
+            document.querySelector('.product-detail-info h1').textContent = product.name;
+            document.querySelector('.detail-price').textContent = `${product.price.toFixed(2)}`;
+            document.querySelector('.product-rating .stars').textContent = '⭐'.repeat(product.rating);
+            document.querySelector('.product-rating span').textContent = `(${product.reviews} reviews)`;
+            document.querySelector('.main-image div').textContent = product.icon;
+            document.querySelectorAll('.thumbnail div').forEach(t => t.textContent = product.icon);
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function showAbout() {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('productListingPage').style.display = 'none';
+            document.getElementById('productDetailsPage').classList.remove('active');
+            document.getElementById('contactPage').style.display = 'none';
+            document.getElementById('aboutPage').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showContact() {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('productListingPage').style.display = 'none';
+            document.getElementById('productDetailsPage').classList.remove('active');
+            document.getElementById('contactPage').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+        }
+
+        function showPrivacyPolicy() {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('productListingPage').style.display = 'none';
+            document.getElementById('productDetailsPage').classList.remove('active');
+            document.getElementById('aboutPage').style.display = 'none';
+            document.getElementById('contactPage').style.display = 'none';
+            document.getElementById('privacyPolicyPage').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+  
+        function handleSearch() {
+        const searchValue = document.getElementById('searchInput').value.toLowerCase().trim();
+        if (searchValue) {
+            const searchWords = searchValue.split(' '); // split input into words
+            const filtered = products.filter(p => {
+            const nameCat = (p.name + ' ' + p.category).toLowerCase();
+            // check if all words exist in name or category
+            return searchWords.every(word => nameCat.includes(word));
+        });
+
+        showProducts();
+        if (filtered.length > 0) {
+            generateProducts(filtered);
+        } else {
+            document.getElementById('productsGrid').innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;">
+                    <h2 style="font-size: 32px; margin-bottom: 15px;">No products found</h2>
+                    <p style="color: #6b7280; font-size: 18px;">Try different keywords</p>
+                </div>
+            `;
+        }
+    }
+}
+
+
+        function filterByCategory(category) {
+            const filtered = products.filter(p => p.category === category);
+            showProducts();
+            generateProducts(filtered);
+        }
+
+
+        function addToCart(productId, event) {
+            if (event) event.stopPropagation();
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            
+            updateCartCount();
+            showNotification(`${product.name} added to cart!`);
+        }
+
+        function addToCartFromDetails() {
+            const size = document.getElementById('sizeSelect').value;
+            if (!size) {
+                alert('Please select a size');
+                return;
+            }
+            addToCart(currentProductId);
+        }
+
+        function buyNow(productId, event) {
+            if (event) event.stopPropagation();
+            addToCart(productId);
+            alert('Proceeding to checkout...');
+        }
+
+        function updateCartCount() {
+            const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.querySelector('.cart-count').textContent = total;
+        }
+
+
+        function increaseQuantity() {
+            quantity++;
+            document.getElementById('quantityValue').textContent = quantity;
+        }
+
+        function decreaseQuantity() {
+            if (quantity > 1) {
+                quantity--;
+                document.getElementById('quantityValue').textContent = quantity;
+            }
+        }
+        document.querySelectorAll('.page-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+        if (this.textContent.includes('Prev') || this.textContent.includes('Next')) return
+        document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        });
+    });
+
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed; top: 100px; right: 20px; background-color: #10b981;
+                color: white; padding: 16px 24px; border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10000;
+                font-weight: 500; animation: slideIn 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(400px); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideIn 0.3s ease-out reverse';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        console.log('eCommerce website loaded successfully!');
+    </script>
+</body>
+</html>
